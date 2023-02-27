@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row mt-5">
+        <h3 class="text-center">Patients</h3>
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead class="bg-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Member since</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let patient of patients">
+                        <th scope="row">{{patient.user.id}}</th>
+                        <td>{{patient.user.name}}</td>
+                        <td>{{patient.user.email}}</td>
+                        <td>{{patient.user.created_at | date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

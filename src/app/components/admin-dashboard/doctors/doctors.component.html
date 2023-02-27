@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+        <div *ngIf="doctorAdded" class=" alert-dismissible alert alert-success" role="alert">
+            Doctor added successfully!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="err" class=" alert-dismissible alert alert-danger" role="alert">
+            *{{err}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center my-2">
+                <h3>Doctors</h3>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Add doctor
+                </button>
+            </div>
+            <table class="table table-bordered">
+                <thead class="bg-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Specialization</th>
+                        <th scope="col">Clinic</th>
+                        <th scope="col">Member since</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let doctor of doctors">
+                        <th scope="row">{{doctor.user.id}}</th>
+                        <td>{{doctor.user.name}}</td>
+                        <td>{{doctor.user.email}}</td>
+                        <td>{{doctor.specialization}}</td>
+                        <td>{{doctor.clinic.name}}</td>
+                        <td>{{doctor.user.created_at | date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add doctor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="formGroup" (ngSubmit)="addDoctor()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" formControlName="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Specialization</label>
+                        <input type="text" class="form-control" formControlName="specialization" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Clinic</label>
+                        <select class="form-select" formControlName="clinic_id" required>
+                            <option *ngFor="let clinic of clinics" value="{{clinic.id}}">{{clinic.name}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" formControlName="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" formControlName="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password confirmation</label>
+                        <input type="password" class="form-control" formControlName="password_confirmation" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
